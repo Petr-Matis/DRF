@@ -3,15 +3,18 @@ from rest_framework.generics import RetrieveAPIView, DestroyAPIView, CreateAPIVi
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from course.models import Course, Lesson, Payments
+from course.models import Course, Lesson, Payments, Subscription
+from course.paginators import CoursePaginator
 from course.permissions import IsModerator, IsCustomPermission, IsOwner
-from course.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer
+from course.serializers import CourseSerializer, LessonSerializer, PaymentsSerializer, SubscriptionSerializer
 
 
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, IsCustomPermission]
+    if Course.objects.all().count() > CoursePaginator.page_size:
+        pagination_class = CoursePaginator
 
 
 class LessonDetailAPIView(RetrieveAPIView):
@@ -24,6 +27,8 @@ class LessonListAPIView(ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated]
+    if Lesson.objects.all().count() > CoursePaginator.page_size:
+        pagination_class = CoursePaginator
 
 
 class LessonCreateAPIView(CreateAPIView):
@@ -52,3 +57,7 @@ class PaymentsViewSet(ModelViewSet):
     search_fields = ["type_metod", "payment_method"]
     permission_classes = [IsAuthenticated]
 
+
+class SubscriptionViewSet(ModelViewSet):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
