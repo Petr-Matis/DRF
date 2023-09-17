@@ -10,8 +10,8 @@ class Command(BaseCommand):
             email='test@1qwe.ru',
             first_name='test',
             last_name='1qwe',
-            is_staff=True,
-            is_superuser=True
+            is_staff=False,
+            is_superuser=False
 
         )
 
