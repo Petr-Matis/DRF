@@ -42,8 +42,8 @@ class Lesson(models.Model):
         return f'{self.name}'
 
     class Meta:
-        verbose_name = 'Урок'
-        verbose_name_plural = 'Уроки'
+        verbose_name = 'Курс'
+        verbose_name_plural = 'Курсы'
 
 
 class Payments(models.Model):

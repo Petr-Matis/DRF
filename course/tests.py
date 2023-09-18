@@ -21,6 +21,7 @@ class LessonTestCase(APITestCase):
             'owner': self.user.pk,
         }
 
+
     def test_create_lesson(self):
         """Создание урока тест"""
         url_lesson_create = reverse('courses:lesson_create')
@@ -122,6 +123,7 @@ class LessonTestCase(APITestCase):
 
 class SubscriptionTestCase(APITestCase):
     def setUp(self) -> None:
+
         self.user1 = User.objects.create(email='test1@1jz.ru', password='12345', is_active=True)
         self.user2 = User.objects.create(email='test2@1jz.ru', password='12345', is_active=True)
         self.user1.save()
@@ -155,3 +157,21 @@ class SubscriptionTestCase(APITestCase):
         url_course_detail = reverse('courses:course-list')
         response = self.client.get(url_course_detail)
         self.assertTrue(response.json()[0]['subscription'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
